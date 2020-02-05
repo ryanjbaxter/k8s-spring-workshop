@@ -1,0 +1,11 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+metadata:
+  name: name-service
+build:
+  artifacts:
+  - image: ryanjbaxter/k8s-workshop-name-service
+    jib: {}
+deploy:
+  kustomize:
+    paths: ["./kustomize/base"]
