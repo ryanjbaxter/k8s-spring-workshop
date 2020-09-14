@@ -1,11 +1,16 @@
-apiVersion: skaffold/v2alpha3
+apiVersion: skaffold/v2beta5
 kind: Config
 metadata:
   name: name-service
 build:
   artifacts:
-  - image: ryanjbaxter/k8s-workshop-name-service
-    jib: {}
+    - image: ryanjbaxter/k8s-workshop-name-service
+      buildpacks:
+        builder: gcr.io/paketo-buildpacks/builder:base-platform-api-0.3
+        dependencies:
+          paths:
+            - src
+            - pom.xml
 deploy:
   kustomize:
     paths: ["./kustomize/base"]
